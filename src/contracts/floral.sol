@@ -80,17 +80,16 @@ contract FloralHome{
         );
     }
 
-    function buyArt(uint index)public payable{
-        require(arts[index].quantity >= 0, "Cannot perform transaction");
+    function buyArt(uint index, uint _quantity)public payable{
          require(
              IERC20Token(cUsdTokenAddress).transferFrom(
                 msg.sender,
                 arts[index].owner,
-                arts[index].amount
+                arts[index].amount * _quantity
             ),
             "Transaction could not be performed"
         );
-        arts[index].quantity -= 1;
+        arts[index].quantity -= _quantity;
     }
 
     function editQuantity(uint index, uint  quantity)public{
