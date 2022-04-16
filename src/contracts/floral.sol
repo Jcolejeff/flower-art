@@ -81,6 +81,8 @@ contract FloralHome{
     }
 
     function buyArt(uint index, uint _quantity)public payable{
+        //Checks if the quantity available for sale is lesser than the quantity specified 
+        require(_quantity <= arts[index].quantity, "Specified quantity is higer than the available quantity");
          require(
              IERC20Token(cUsdTokenAddress).transferFrom(
                 msg.sender,
